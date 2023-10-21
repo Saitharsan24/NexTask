@@ -1,0 +1,36 @@
+.signup-main p{
+    margin: 0px !important;
+}
+
+.signup-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;  
+}
+
+.signup-main h2{
+    font-weight: 600;
+    color: #333333;
+}
+
+.signup-main .signup-name-filed{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.signup-main input{
+    width: 300px;
+    height: 40px;
+    border: 1px solid #2b2b2b;
+    border-radius: 5px;
+    padding: 3px 5px 3px 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.signup-main Button{
+    background-color: #0b3b79;
+    margin: 10px 0px 10px 0px;
+}

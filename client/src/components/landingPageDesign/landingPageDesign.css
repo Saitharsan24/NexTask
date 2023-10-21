@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.landing-main{
+    display: flex;
+    flex-direction: row;
+}
+
+.design-rightside{
+    background-image: url(../../asset/images/02.png);
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.design-leftside{
+    height: 100vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landingPageImg{
+    width: 700px;
+}
+
+.logo{
+    width: 350px;
+    margin: 30px 20px 50px 0px;
+}

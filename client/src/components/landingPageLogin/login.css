@@ -1,0 +1,35 @@
+.login-main p{
+    margin: 0px !important;
+}
+
+.login-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.login-main h2{
+    font-weight: 600;
+    color: #333333;
+}
+
+.login-field input{
+    width: 350px;
+    height: 40px;
+    border: 1px solid #2b2b2b;
+    border-radius: 5px;
+    padding: 3px 5px 3px 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.login-field p{
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.login-main Button{
+    background-color: #0b3b79;
+    margin: 10px 0px 8px 0px;   
+}
