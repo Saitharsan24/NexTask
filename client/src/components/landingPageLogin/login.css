@@ -33,3 +33,13 @@
     background-color: #0b3b79;
     margin: 10px 0px 8px 0px;   
 }
+
+.login-main span{
+    color:#0b3b79;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.login-main span:hover{
+    cursor: pointer;
+}

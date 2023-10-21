@@ -34,3 +34,13 @@
     background-color: #0b3b79;
     margin: 10px 0px 10px 0px;
 }
+
+.signup-main span{
+    color:#0b3b79;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.signup-main span:hover{
+    cursor: pointer;
+}

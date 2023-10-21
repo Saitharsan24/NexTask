@@ -3,7 +3,7 @@ import './signup.css';
 import {Button} from "react-bootstrap"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function signup() {
+function signup({toggleLoginOrSignup}) {
   return (
     <div className='signup-main'>
         <h2>Signup</h2>
@@ -32,7 +32,7 @@ function signup() {
             </div>
         </div>
         <Button>Signup</Button>
-        <p>Already have an account ? Login </p>
+        <p>Already have an account ? <span onClick={toggleLoginOrSignup}>Login</span> </p>
     </div>
   )
 }
