@@ -4,7 +4,7 @@ import TaskTileToDo from '../taskTileToDo/taskTileToDo'
 import TaskTileInProgress from '../taskTileInProgress/taskTileInProgress'
 import TaskTileCompleted from '../taskTileCompleted/taskTileCompleted'
 
-function todoColumn({title,type,data =[],deleteStatus}) {
+function todoColumn({title,type,data =[],deleteStatus, viewDetails}) {
 
     let TaskTileComponent;
     console.log(data);    
@@ -29,7 +29,7 @@ function todoColumn({title,type,data =[],deleteStatus}) {
           <h5>{title}</h5>
         </div>
         <div className='task-list'>
-          {Array.isArray(data) && data.map(task => <TaskTileComponent key={task.title} task={task} deleteStatus={deleteStatus}/>)}
+          {Array.isArray(data) && data.map(task => <TaskTileComponent key={task.title} task={task} deleteStatus={deleteStatus} viewDetails={viewDetails}/>)}
         </div>
       </div>
     </div>

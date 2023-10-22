@@ -1,11 +1,11 @@
 import React from 'react'
 import './taskTileInProgress.css'
 import {FaEdit} from 'react-icons/fa'
-import {AiFillDelete} from 'react-icons/ai'
+import {FaTrashCan} from 'react-icons/fa6'
 import { Button } from 'react-bootstrap'
 
 
-function TodoTaskTile({task,deleteStatus}) {
+function TodoTaskTile({task, deleteStatus, viewDetails}) {
   return (
     <div className='task-tile-inpro-main shadow'>
         <div className='tile-heading'>
@@ -19,10 +19,10 @@ function TodoTaskTile({task,deleteStatus}) {
         <div className='tile-actions'>
             <div className="tile-icon">
                 <FaEdit className='edit-icon'/>
-                <AiFillDelete className='delete-icon' onClick={deleteStatus}/>
+                <FaTrashCan className='delete-icon' onClick={deleteStatus}/>
             </div>
             <div className='tile-button'>
-                <Button variant='outline-primary'>View</Button>
+                <Button variant='outline-primary' onClick={viewDetails}>View</Button>
                 <Button variant='outline-primary'>Complete</Button>
             </div>
         </div>

@@ -15,6 +15,6 @@ function deletePopUp({onClose}) {
         </div>
     </div>
   )
-}
+} 
 
 export default deletePopUp
