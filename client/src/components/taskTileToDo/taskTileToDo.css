@@ -1,0 +1,84 @@
+.task-tile-main p,h6{
+    margin-bottom: 0 !important;
+}
+
+.task-tile-main{
+    width: 98%;
+    height: 185px;
+    border-radius: 25px;
+    border: 1px solid #0b3b79;
+    display: flex;
+    flex-direction: column;
+    background-color: #d8e1ee;
+}
+
+.shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tile-heading{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.tile-heading h6{
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b3b79;
+}
+
+.tile-details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.tile-details p{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 5px 0px 0px 20px !important; 
+}
+
+.tile-actions{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 10px 5px 10px;
+    margin: 10px 10px 0px 10px;
+    justify-content: space-between;
+}
+
+.tile-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    font-size: 22px;
+}
+
+.tile-icon .delete-icon:hover, .tile-icon .edit-icon:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: .1s;
+}
+
+
+.delete-icon{
+    color: #ff0000;
+}
+
+.edit-icon{
+    color:#0b3b79
+}
+
+.tile-button{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.tile-button Button{
+    border-radius: 15px;
+    color: #0b3b79;
+    border-color: #0b3b79;
+}

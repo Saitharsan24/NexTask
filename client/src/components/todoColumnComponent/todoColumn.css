@@ -1,6 +1,6 @@
 /* Styling the scrollbar for Chrome, Safari & newer versions of Opera */
 .task-list::-webkit-scrollbar {
-    width: 10px; /* Adjust width for vertical scroll thumb */
+    width: 7px; /* Adjust width for vertical scroll thumb */
 }
 
 .task-list::-webkit-scrollbar-track {
@@ -8,19 +8,13 @@
 }
 
 .task-list::-webkit-scrollbar-thumb {
-    background: #d68282; /* Color of the scroll thumb */
+    background: #bfbfbf; /* Color of the scroll thumb */
+    border-radius: 25px;
 }
 
 .task-list::-webkit-scrollbar-thumb:hover {
     background: #555; /* Color of the scroll thumb on hover */
 }
-
-/* Styling the scrollbar for Firefox */
-.scroll-container {
-    scrollbar-width: thin; /* or "none" if you want to hide it */
-    scrollbar-color: #888 #f1f1f1; /* thumb and track color */
-}
-
 
 .todo-column p{
     margin-bottom: 0 !important;
@@ -36,12 +30,14 @@
 }
 
 .task-list{
-    overflow-y: auto;
+    overflow: auto;
     display: flex;
     flex-direction: column;
-    background-color: #28A067;
+    align-items: center;
+    /* background-color: #28A067; */
     width: 97%;
-    height: 86%;
+    height: 90%;
+    gap: 15px;
     /* Styling the scrollbar for Firefox */
     scrollbar-width: thin; /* or "none" if you want to hide it */
     scrollbar-color: #888 #f1f1f1; /* thumb and track color */
@@ -53,7 +49,7 @@
     align-items: center;
     width: 90%;
     height: 95%;
-    border: 2px solid #2b2b2b;
+    /* border: 2px solid #2b2b2b; */
     border-radius: 30px;
     overflow-y: hidden;
 }
@@ -75,8 +71,6 @@
 .todo-text-color{
     color: #ffffff;
     background-color: #0b3b79;
-    opacity: 0.8;
-   
 }
 
 .in-progress-text-color{
@@ -88,3 +82,4 @@
     color: #ffffff;
     background-color: #28A067;
 }
+

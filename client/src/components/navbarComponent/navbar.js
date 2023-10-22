@@ -2,7 +2,7 @@ import React from 'react';
 import './navbar.css';
 import {Button} from "react-bootstrap"
 import {Link, NavLink } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function navbar() {
   return (

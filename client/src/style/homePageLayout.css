@@ -9,4 +9,7 @@
     justify-content: center;
     align-items: center;
     height: 87.5vh;
+    background-image: url('../asset/images/bg.png');
+    background-repeat: no-repeat;
+    background-size:cover;
 }
