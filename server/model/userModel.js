@@ -7,8 +7,8 @@ const isExists = ({ email }) => {
       .then((res) => {
         return res[0][0];
       });
-  };
-
+  }; 
+ 
 //create user
 const signupModel = async ({ firstName, lastName, email, password }) => {
   await db.query(

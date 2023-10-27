@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const secretCode = "nextask";
 const passwordSalt = 10;
-
+ 
 //user login controller
 const loginHandler = async (req, res) => {
     const { email, password } = req.body;
@@ -13,23 +13,24 @@ const loginHandler = async (req, res) => {
       const isExists = await userHandler.isExists({ email });
   
       if (!isExists) {
-        return res.status(400).json({ message: "User not registered." });
+        return res.status(401).json({ message: "Incorrect username or password."});
       }
   
       const valid = await bcrypt.compare(password, isExists.password);
       if (!valid) {
-        return res.status(400).json({ message: "Wrong password." });
+        return res.status(401).json({ message: "Incorrect username or password."});
       }
 
       const token = jwt.sign(
         { email: isExists.email, id: isExists.id },
         secretCode,
       );
-
       res.status(200).send({
+  
         user: {
           email: isExists.email,
-          firstName: isExists.first_name
+          firstName: isExists.first_name,
+          userId: isExists.user_id
         },
         token,
       });
@@ -65,10 +66,11 @@ const signUpHandler = async (req, res) => {
 
     // token generate
     const token = jwt.sign(
-      { email: createUser.email, id: createUser.user_id, first_name: createUser.first_name },
+      { email: createUser.email, userId: createUser.user_id, firstName: createUser.first_name },
       secretCode,
     );
     res.status(201).send({ user: createUser[0], token });
+    
   } catch (e) {
     console.log(e.message);
     return res.status(500).send("internal server error");

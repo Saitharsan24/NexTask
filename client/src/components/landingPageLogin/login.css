@@ -9,6 +9,12 @@
     gap: 10px;
 }
 
+.login-main .error{
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
 .login-main h2{
     font-weight: 600;
     color: #333333;
@@ -34,12 +40,38 @@
     margin: 10px 0px 8px 0px;   
 }
 
-.login-main span{
+.login-main .signup-toggle{
     color:#0b3b79;
     font-weight: 600;
     text-decoration: underline;
 }
 
-.login-main span:hover{
+.login-main .signup-toggle:hover{
     cursor: pointer;
+}
+
+
+.login-error-popup p{
+    margin: 0px;;
+}
+
+.login-error-popup{
+    position: fixed;
+    bottom: 7%;
+    right: 4%;
+    width: auto;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    pointer-events: none;
+    padding: 10px 20px;
+    border:2px solid red;
+    color: red;
+    font-weight: 650;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }

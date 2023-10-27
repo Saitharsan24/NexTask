@@ -2,6 +2,12 @@
     margin: 0px !important;
 }
 
+.signup-main .error{
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
 .signup-main{
     display: flex;
     flex-direction: column;
@@ -21,7 +27,7 @@
 }
 
 .signup-main input{
-    width: 300px;
+    width: 320px;
     height: 40px;
     border: 1px solid #2b2b2b;
     border-radius: 5px;
@@ -35,12 +41,12 @@
     margin: 10px 0px 10px 0px;
 }
 
-.signup-main span{
+.signup-main .login-toggle{
     color:#0b3b79;
     font-weight: 600;
     text-decoration: underline;
 }
 
-.signup-main span:hover{
+.signup-main .login-toggle:hover{
     cursor: pointer;
 }

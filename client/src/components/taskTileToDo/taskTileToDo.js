@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 
 
 function TodoTaskTile({task, deleteStatus, viewDetails}) {
-    console.log(task);
+   
   return (
     <>
     <div className='task-tile-main shadow'>

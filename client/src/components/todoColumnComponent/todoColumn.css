@@ -83,3 +83,19 @@
     background-color: #28A067;
 }
 
+.new-task-btn{
+    width: 90%;
+    background-color: rgb(144, 144, 144);
+    border: none;
+    margin: 0px 0px 10px 0px;
+}
+
+.new-task-btn:active{
+    background-color: rgb(40, 40, 40) !important;
+    border: none;
+}
+
+.new-task-btn:hover{
+    width: 90%;
+    background-color: rgb(99, 99, 99) !important;
+}

@@ -3,11 +3,12 @@ import './todoColumn.css'
 import TaskTileToDo from '../taskTileToDo/taskTileToDo'
 import TaskTileInProgress from '../taskTileInProgress/taskTileInProgress'
 import TaskTileCompleted from '../taskTileCompleted/taskTileCompleted'
+import { Button } from 'react-bootstrap'
 
-function todoColumn({title,type,data =[],deleteStatus, viewDetails}) {
+function todoColumn({title,type,data =[],deleteStatus, viewDetails, createTask}) {
 
     let TaskTileComponent;
-    console.log(data);    
+    console.log(data);
     switch(type) {
       case 'todo-text-color':
         TaskTileComponent = TaskTileToDo;
@@ -28,6 +29,9 @@ function todoColumn({title,type,data =[],deleteStatus, viewDetails}) {
         <div className={type +' '+'todo-column-title'}>
           <h5>{title}</h5>
         </div>
+        {
+         title=="To do" && <Button onClick={createTask} className='new-task-btn'>+ New task</Button>
+        }
         <div className='task-list'>
           {Array.isArray(data) && data.map(task => <TaskTileComponent key={task.title} task={task} deleteStatus={deleteStatus} viewDetails={viewDetails}/>)}
         </div>
