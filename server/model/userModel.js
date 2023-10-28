@@ -23,4 +23,20 @@ const signupModel = async ({ firstName, lastName, email, password }) => {
     });
   };
 
-  module.exports = { signupModel, isExists };
+  //get all users
+  const getUsers = async () => {
+    return db.execute(`SELECT first_name,user_id,email FROM user;`).then((res) => {
+      return res[0];
+    });
+  }
+
+  //get user by id
+  const getUserById = async ({userId}) => {
+    return db.execute(`SELECT first_name,user_id,email FROM user WHERE user_id = ?;`,
+                        [userId]
+    ).then((res) => {
+      return res[0];
+    });
+  }
+
+  module.exports = { signupModel, isExists, getUsers, getUserById };

@@ -43,6 +43,11 @@ function Login({toggleLoginOrSignup}) {
           {
             email: email,
             password: password
+          },
+          {
+            headers: {
+              'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
           }
         ).then((response) => {
           

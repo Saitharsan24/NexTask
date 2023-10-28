@@ -15,10 +15,10 @@ app.listen(3001, () =>   {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(middleware);
 
-app.use("/api", taskRouter);
 app.use("/api", userRouter);
+app.use(middleware);
+app.use("/api", taskRouter);
 
 app.use("/", (req, res, next) => {
   res.send("SERVER RUNNING WELL !!!");

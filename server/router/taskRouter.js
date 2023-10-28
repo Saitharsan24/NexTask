@@ -6,6 +6,7 @@ taskRouter.get("/getTodo/:id", taskHandler.getTodoTasksHandler);
 taskRouter.get("/getInprocess/:id", taskHandler.getInProcessTasksHandler);
 taskRouter.get("/getComplete/:id", taskHandler.getCompleteTasksHandler);
 taskRouter.post("/newTask", taskHandler.createTaskHandler);
+taskRouter.delete("/deleteTask/:id", taskHandler.deleteTaskHandler);
 
 
 module.exports = taskRouter; 

@@ -8,14 +8,14 @@ const createTaskHandler = async (req, res) => {
     try {
         const data = await taskHandler.createTask({ title, description, createdBy});
         const taskId = data.task_id;
-        console.log(assignedTo);
+        
         if(assignedTo !== createdBy){
             const userAssign = await taskHandler.assignTask({taskId,assignedTo: createdBy});
         }
         const ownerAssign = await taskHandler.assignTask({taskId,assignedTo: assignedTo});
 
         return res.status(200).send(data);
-        
+
     } catch (e) {   
         console.log(e.message);
         return res.status(500).send("internal server error");
@@ -23,34 +23,56 @@ const createTaskHandler = async (req, res) => {
 }
 
 const deleteTaskHandler = async (req, res) => {
-
+    try {
+        const taskId = req.params.id;  
+        const data = await taskHandler.deleteTask({taskId});
+        return res.status(200).send(data);
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
 }
 
 const getTodoTasksHandler = async (req, res) => {
-    const userId = req.params.id;
-    const status = 0;
-    // console.log(userId,status);  
+    try {
+        const userId = req.params.id;
+        const status = 0;
+        // console.log(userId,status);  
 
-    const data = await taskHandler.getTasks({ userId,status});
-    res.status(200).send(data);
+        const data = await taskHandler.getTasks({ userId,status});
+        res.status(200).send(data);
+    } catch (e) {  
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
 };
 
 const getInProcessTasksHandler = async (req, res) => {
-    const userId = req.params.id;
-    const status = 1;
-    // console.log(userId,status);  
+    try {
+        const userId = req.params.id;
+        const status = 1;
+        // console.log(userId,status);  
 
-    const data = await taskHandler.getTasks({ userId,status});
-    res.status(200).send(data);
+        const data = await taskHandler.getTasks({ userId,status});
+        res.status(200).send(data);
+    } catch (e) {  
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
 };
 
 const getCompleteTasksHandler = async (req, res) => {
-    const userId = req.params.id;
-    const status = 2;
-    // console.log(userId,status);  
+    try {
+        const userId = req.params.id;
+        const status = 2;
+        // console.log(userId,status);  
 
-    const data = await taskHandler.getTasks({ userId,status});
-    res.status(200).send(data);
+        const data = await taskHandler.getTasks({ userId,status});
+        res.status(200).send(data);
+    } catch (e) {  
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
 };
 
 module.exports= { createTaskHandler, getTodoTasksHandler, getInProcessTasksHandler, getCompleteTasksHandler,deleteTaskHandler };

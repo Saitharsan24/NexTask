@@ -17,13 +17,17 @@ function ToDoBoard() {
   //state variables for create new task pop up showup and collapse
   const [showCreateNewTask,setShowCreateNewTask] = useState(false);
 
-  //getting local storage message
-  const message = localStorage.getItem('message');
-  const [showMessagePopup, setShowMessagePopup] = useState(message);
+  //state variable for message popup
+  const [showMessagePopup, setShowMessagePopup] = useState(false);
+  const [popupMessage, setMessage] = useState('');
+
+  //state variable for current task id
+  const [currentTaskId, setCurrentTaskId] = useState(null);
 
   //get your id from localstorage 
   const user = JSON.parse(localStorage.getItem('user'));
 
+  
 
   const [toDo,setToDo] = useState([]);
   const [inProcess,setInProcess] = useState([]);
@@ -31,16 +35,18 @@ function ToDoBoard() {
 
   //message popup
   useEffect(() => {
+    let message = localStorage.getItem('message');
     if (message) {
+      setMessage(message);
+      setShowMessagePopup(true);
       setTimeout(() => { 
         setShowMessagePopup(false);
         localStorage.removeItem('message');
       }, 3000);
     }
-  }, [message]);
+  }, [showCreateNewTask, showDeletePopUp]);
 
   //get tasks from database
-
   const baseURL = 'http://localhost:3001/api';
 
   useEffect(() => {
@@ -51,7 +57,6 @@ function ToDoBoard() {
     )
     .then((response) => {
       setToDo(response.data);
-      // console.log(toDo);
     })
     .catch((error) => {
       console.log(error);
@@ -64,7 +69,6 @@ function ToDoBoard() {
     )
     .then((response) => {
       setCompleted(response.data);
-      // console.log(toDo);
     })
     .catch((error) => {
       console.log(error);
@@ -77,14 +81,14 @@ function ToDoBoard() {
     )
     .then((response) => {
       setInProcess(response.data);
-      // console.log(toDo);
     })
     .catch((error) => {
       console.log(error);
     })
-  },[]);
+  },[showCreateNewTask,showDeletePopUp,showDetailsPopup]);
 
-  const toggleDeletePopUp = () => {
+  const toggleDeletePopUp = (taskId) => {
+    setCurrentTaskId(taskId)
     setShowDeletePopUp(prevState => !prevState);
   }
 
@@ -105,7 +109,7 @@ function ToDoBoard() {
     }
 
     {showMessagePopup && (
-                <div className="login-signin-popup"><p>{message}</p></div>)
+                <div className="login-signin-popup"><p>{popupMessage}</p></div>)
     }
 
     {showDetailsPopup && (
@@ -114,7 +118,7 @@ function ToDoBoard() {
     }
 
     {showDeletePopUp && (
-                <DeletePopUp onClose={() => setShowDeletePopUp(false)} />
+                <DeletePopUp taskId={currentTaskId} onClose={() => setShowDeletePopUp(false)} />
     )}
 
     <div className='user-home'>

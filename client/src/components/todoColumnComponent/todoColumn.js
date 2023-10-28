@@ -1,14 +1,14 @@
-import React from 'react'
+import {React} from 'react'
 import './todoColumn.css'
 import TaskTileToDo from '../taskTileToDo/taskTileToDo'
 import TaskTileInProgress from '../taskTileInProgress/taskTileInProgress'
 import TaskTileCompleted from '../taskTileCompleted/taskTileCompleted'
 import { Button } from 'react-bootstrap'
 
-function todoColumn({title,type,data =[],deleteStatus, viewDetails, createTask}) {
+function TodoColumn({title,type,data =[],deleteStatus, viewDetails, createTask}) {
 
     let TaskTileComponent;
-    console.log(data);
+
     switch(type) {
       case 'todo-text-color':
         TaskTileComponent = TaskTileToDo;
@@ -23,6 +23,7 @@ function todoColumn({title,type,data =[],deleteStatus, viewDetails, createTask})
         TaskTileComponent = () => null; // default to a no-op function
     }
 
+    
   return (
     <div className='todo-column '>
       <div className='todo-outline'>
@@ -40,4 +41,4 @@ function todoColumn({title,type,data =[],deleteStatus, viewDetails, createTask})
   )
 }
 
-export default todoColumn
+export default TodoColumn

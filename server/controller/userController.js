@@ -76,5 +76,28 @@ const signUpHandler = async (req, res) => {
     return res.status(500).send("internal server error");
   }
 };
+
+//get all users controller
+const getUsersHandler = async (req, res) => {
+    try {
+        const data = await userHandler.getUsers();
+        res.status(200).send(data);
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+};
+
+//getuser by id
+const getUserByIdHandler = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const data = await userHandler.getUserById({userId});
+        res.status(200).send(data);
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+}
   
-module.exports = { signUpHandler, loginHandler };
+module.exports = { signUpHandler, loginHandler, getUsersHandler,getUserByIdHandler };

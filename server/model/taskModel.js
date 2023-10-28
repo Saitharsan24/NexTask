@@ -32,8 +32,24 @@ const assignTask = async ({taskId,assignedTo}) => {
     })
 }
 
-const deleteTask = async () => {
-    
+const deleteTask = async ({taskId}) => {
+    await db.execute(`DELETE FROM task WHERE task_id = ?;`,
+                        [taskId]
+    ).then((res)=>{
+        return res[0][0];
+    })
 }
 
-module.exports = { getTasks,createTask,assignTask };
+const updateTask = async ({task}) => {
+    await db.execute(`UPDATE task SET title = ?, description = ?, status = ? WHERE task_id = ?;`,
+                        [task.title,task.description,task.status,task.task_id]
+    ).then((res)=>{
+        return res[0][0];
+    })
+}
+
+updateTaskUser = async ( {task} ) => {
+
+}
+
+module.exports = { getTasks,createTask,assignTask,deleteTask, updateTask };
