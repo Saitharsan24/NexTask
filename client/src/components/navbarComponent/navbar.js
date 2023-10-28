@@ -21,16 +21,16 @@ function Navbar() {
       <img src={require('../../asset/images/logo.png')} alt="logo" className='nav-logo' />
       </Link>
       <div className='nav-elements'>
-        <div className='nav-links'>
+        {/* <div className='nav-links'>
           <NavLink to={'/home'}>
             <span>Home</span>
           </NavLink>
           <NavLink to={'/setting'}>
             <span>Setting</span>
           </NavLink>
-        </div>
+        </div> */}
 
-        <div className='profile-pic'></div> 
+        {/* <div className='profile-pic'></div>  */}
         <p>Welcome ! &nbsp; <span className='nav-barname'>{user.firstName}</span></p>
         <Link to={'/'}>
           <Button variant='outline-primary' onClick={logout}>Logout</Button>

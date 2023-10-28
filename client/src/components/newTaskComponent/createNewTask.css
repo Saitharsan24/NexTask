@@ -6,3 +6,17 @@
     width: 25%;
 }
 
+.create-new-task-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+    justify-content: flex-end !important;
+    margin: 10px 0px 0px 0px;
+  
+}
+
+.create-new-task-btn Button{
+    background-color: #0b3b79;
+}
+

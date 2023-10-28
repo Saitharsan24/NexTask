@@ -64,7 +64,7 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
                 {taskOwner && <FaTrashCan className='delete-icon' onClick={()=>deleteStatus(taskId)}/>}
             </div>
             <div className='tile-button'>
-                <Button variant='outline-primary' onClick={viewDetails}>View</Button>
+                <Button variant='outline-primary' onClick={()=>viewDetails(task)}>View</Button>
             </div>
         </div>
     </div>

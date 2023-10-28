@@ -1,12 +1,14 @@
 const express = require("express");
 const taskRouter = express.Router();
 const taskHandler = require("../controller/taskController");
+const middleware = require("../utility/middleware/auth");
 
-taskRouter.get("/getTodo/:id", taskHandler.getTodoTasksHandler);
-taskRouter.get("/getInprocess/:id", taskHandler.getInProcessTasksHandler);
-taskRouter.get("/getComplete/:id", taskHandler.getCompleteTasksHandler);
+taskRouter.get("/getTodo/:id",middleware, taskHandler.getTodoTasksHandler);
+taskRouter.get("/getInprocess/:id",middleware, taskHandler.getInProcessTasksHandler);
+taskRouter.get("/getComplete/:id",middleware, taskHandler.getCompleteTasksHandler);
 taskRouter.post("/newTask", taskHandler.createTaskHandler);
 taskRouter.delete("/deleteTask/:id", taskHandler.deleteTaskHandler);
+taskRouter.put("/startTask/:id",middleware, taskHandler.startTaskHandler);
+taskRouter.put("/completeTask/:id", taskHandler.completeTaskHandler);
 
-
-module.exports = taskRouter; 
+module.exports = taskRouter;

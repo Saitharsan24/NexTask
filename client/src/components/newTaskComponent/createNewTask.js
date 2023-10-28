@@ -5,7 +5,7 @@ import Axios from 'axios';
 import Select from 'react-select';
 
 
-function CreateNewTask({onClose, allUsers}) {
+function CreateNewTask({onClose}) {
     
     const baseURL = 'http://localhost:3001/api';
 
@@ -20,12 +20,25 @@ function CreateNewTask({onClose, allUsers}) {
         setSelectedOption(option);
     }
 
-    setUsers(allUsers.map((items) => ({
-        value: items.user_id,
-        label: items.first_name + " - " + items.email
-    })
-    ));
-    
+    useEffect(() => {
+        Axios.get(baseURL+'/getUsers',{
+            headers: {
+              'authorization': `Bearer ${localStorage.getItem('token')}`
+          }}
+          )   
+          .then((response) => {
+            setUsers(response.data.map((items) => ({
+                value: items.user_id,
+                label: items.first_name + " - " + items.email
+            })
+            ));
+          })
+          .catch((error) => {
+            console.log(error);
+        })
+    },[]);
+
+
     const createTask = () => {
         Axios.post(baseURL+'/newTask',
             {
@@ -48,11 +61,12 @@ function CreateNewTask({onClose, allUsers}) {
         })
     }
 
+
   return (
     <div>
       <div className="popup">
       <div className='view-details new-task-div'>
-        <h2>Title</h2>
+        <h2 className='create-task-heading'>Create New Task</h2>
             <div className='task-details-fields'>
                 <p>Title :</p>
                 <input type="text" onChange={(event) => setTitle(event.target.value)} />
@@ -70,7 +84,7 @@ function CreateNewTask({onClose, allUsers}) {
                     value={selectedOption} />
 
             </div>
-            <div className='details-btn'>
+            <div className='create-new-task-btn'>
                 <Button variant='primary' onClick={onClose} className='create-task-btn'>Cancel</Button>
                 <Button variant='primary' onClick={createTask} className='create-task-btn'>Create</Button>
             </div>

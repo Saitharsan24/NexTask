@@ -1,6 +1,5 @@
 import {React,useEffect,useState} from 'react'
 import './taskTileInProgress.css'
-import {FaEdit} from 'react-icons/fa'
 import {FaTrashCan} from 'react-icons/fa6'
 import { Button } from 'react-bootstrap'
 import Axios from 'axios'
@@ -13,14 +12,14 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
     const createdOn = task.created_on;
     const datePart = createdOn.split('T')[0];
 
-   useEffect(() => {
-        if(task.created_by == task.user_id){
-            setTaskOwner(true);
-        }
-    });
-
     const [createdBy, setCreatedBy] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
+
+    useEffect(() => {
+            if(task.created_by == task.user_id){
+                setTaskOwner(true);
+            }
+    });
 
     const baseURL = 'http://localhost:3001/api';
     useEffect(() => {
@@ -49,6 +48,21 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
         }
     });
 
+    const handleComplete = () => {
+        Axios.put(baseURL+'/completeTask/'+taskId,{
+                headers: {
+                    'authorization':`Bearer ${localStorage.getItem('token')}`
+                }
+            }
+        ).then((response) => {
+            console.log(response);
+            localStorage.setItem('message',"Task completed successfully !");
+            window.location.reload();
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
 
   return (
     <div className='task-tile-inpro-main shadow'>
@@ -62,12 +76,11 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
         </div>
         <div className='tile-actions'>
             <div className="tile-icon">
-                {taskOwner && <FaEdit className='edit-icon'/>}
                 {taskOwner && <FaTrashCan className='delete-icon' onClick={()=>deleteStatus(taskId)}/>}
             </div>
             <div className='tile-button'>
-                <Button variant='outline-primary' onClick={viewDetails}>View</Button>
-                <Button variant='outline-primary'>Complete</Button>
+                <Button variant='outline-primary' onClick={()=>viewDetails(task)}>View</Button>
+                <Button variant='outline-primary' onClick={()=>handleComplete()}>Complete</Button>
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 import {React,useState,useEffect} from 'react'
 import './taskTileToDo.css'
-import {FaEdit} from 'react-icons/fa'
 import {FaTrashCan} from 'react-icons/fa6'
 import { Button } from 'react-bootstrap'
 import Axios from 'axios'
@@ -16,6 +15,8 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
     const [createdBy, setCreatedBy] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
 
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
             if(task.created_by == task.user_id){
                 setTaskOwner(true);
@@ -24,7 +25,8 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
 
     const baseURL = 'http://localhost:3001/api';
     useEffect(() => {
-        Axios.get(baseURL+'/getUserById/'+task.created_by,{
+        const asyncFunc = async () => {
+       await Axios.get(baseURL+'/getUserById/'+task.created_by,{
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('token')}`
             }}
@@ -35,7 +37,7 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
             });
 
         if (task.created_by != task.user_id) {
-            Axios.get(baseURL+'/getUserById/'+task.user_id,{
+        await Axios.get(baseURL+'/getUserById/'+task.user_id,{
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -47,7 +49,28 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
         } else {
             setAssignedTo(createdBy);
         }
-    });
+        }
+
+        asyncFunc();
+    },[]);
+
+    const handleStart = () => {
+       
+        Axios.put(baseURL+'/startTask/'+taskId,
+            {
+                headers: {
+                    'authorization': `Bearer ${token}`
+                }
+            }
+        ).then((response) => {
+            console.log(response);
+            localStorage.setItem('message',"Task started successfully !");
+            window.location.reload();
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
 
   return (
     <>
@@ -62,12 +85,11 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
         </div>
         <div className='tile-actions'>
             <div className="tile-icon">
-                {taskOwner && <FaEdit className='edit-icon'/>}
                 {taskOwner && <FaTrashCan className='delete-icon' onClick={()=>deleteStatus(taskId)}/>}
             </div>
             <div className='tile-button'>
-                <Button variant='outline-primary' onClick={viewDetails}>View</Button>
-                <Button variant='outline-primary'>Start</Button>
+                <Button variant='outline-primary' onClick={()=>viewDetails(task)}>View</Button>
+                <Button variant='outline-primary' onClick={handleStart}>Start</Button>
             </div>
         </div>
     </div>

@@ -1,5 +1,4 @@
 const db = require("../utility/database");
-const jwt = require("jsonwebtoken");
 
 const getTasks = async ({userId,status}) => {
     return db.execute(`SELECT user_task.task_id,title,description,created_on,created_by,status,user_task.user_id,first_name FROM ((user_task 
@@ -48,8 +47,12 @@ const updateTask = async ({task}) => {
     })
 }
 
-updateTaskUser = async ( {task} ) => {
-
+const updateTaskStatus = async ( {status,taskId} ) => {
+    await db.execute(`UPDATE task SET status = ? WHERE task_id = ?;`,
+                        [status,taskId]
+    ).then((res)=>{
+        return res[0][0];
+    })
 }
 
-module.exports = { getTasks,createTask,assignTask,deleteTask, updateTask };
+module.exports = { getTasks,createTask,assignTask,deleteTask, updateTask, updateTaskStatus };

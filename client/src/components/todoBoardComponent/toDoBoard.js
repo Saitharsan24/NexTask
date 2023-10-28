@@ -24,6 +24,9 @@ function ToDoBoard() {
   //state variable for current task id
   const [currentTaskId, setCurrentTaskId] = useState(null);
 
+  //current task
+  const [currentTask, setCurrentTask] = useState(null);
+
   //get your id from localstorage 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -50,7 +53,8 @@ function ToDoBoard() {
   const baseURL = 'http://localhost:3001/api';
 
   useEffect(() => {
-    Axios.get(baseURL+'/getTodo/'+user.userId,{
+    const asyncFunc = async () => {
+    await Axios.get(baseURL+'/getTodo/'+user.userId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}
@@ -62,19 +66,7 @@ function ToDoBoard() {
       console.log(error);
     })
 
-    Axios.get(baseURL+'/getInprocess/'+user.userId,{
-      headers: {
-        'authorization': `Bearer ${localStorage.getItem('token')}`
-    }}
-    )
-    .then((response) => {
-      setCompleted(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-
-    Axios.get(baseURL+'/getComplete/'+user.userId,{
+    await Axios.get(baseURL+'/getInprocess/'+user.userId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}
@@ -85,6 +77,20 @@ function ToDoBoard() {
     .catch((error) => {
       console.log(error);
     })
+
+    await Axios.get(baseURL+'/getComplete/'+user.userId,{
+      headers: {
+        'authorization': `Bearer ${localStorage.getItem('token')}`
+    }}
+    )
+    .then((response) => {
+      setCompleted(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    }
+    asyncFunc();
   },[showCreateNewTask,showDeletePopUp,showDetailsPopup]);
 
   const toggleDeletePopUp = (taskId) => {
@@ -92,7 +98,8 @@ function ToDoBoard() {
     setShowDeletePopUp(prevState => !prevState);
   }
 
-  const toggleDetailsPopUp = () => {
+  const toggleDetailsPopUp = (task) => {
+    setCurrentTask(task)
     setShowDetailsPopup(prevState => !prevState);
   }
 
@@ -113,13 +120,13 @@ function ToDoBoard() {
     }
 
     {showDetailsPopup && (
-                <ViewTaskDetails onClose={() => setShowDetailsPopup(false)} />
+                <ViewTaskDetails onClose={() => setShowDetailsPopup(false)} details={currentTask}/>
     )
     }
 
     {showDeletePopUp && (
                 <DeletePopUp taskId={currentTaskId} onClose={() => setShowDeletePopUp(false)} />
-    )}
+    )}  
 
     <div className='user-home'>
         <ToDoColumn title='To do' type='todo-text-color' data={toDo} deleteStatus={toggleDeletePopUp} viewDetails={toggleDetailsPopUp} createTask={toggleCreateTaskPopup} />

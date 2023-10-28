@@ -75,4 +75,38 @@ const getCompleteTasksHandler = async (req, res) => {
     }
 };
 
-module.exports= { createTaskHandler, getTodoTasksHandler, getInProcessTasksHandler, getCompleteTasksHandler,deleteTaskHandler };
+const startTaskHandler = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        console.log(taskId);
+        const status = 1;
+
+        const data = await taskHandler.updateTaskStatus({status,taskId});
+        res.status(200);
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+}
+
+const completeTaskHandler = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const status = 2;
+
+        const data = await taskHandler.updateTaskStatus({status,taskId});
+        res.status(200);
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+}
+
+module.exports= { 
+    createTaskHandler, 
+    getTodoTasksHandler, 
+    getInProcessTasksHandler, 
+    getCompleteTasksHandler,
+    deleteTaskHandler,
+    startTaskHandler,
+    completeTaskHandler };
