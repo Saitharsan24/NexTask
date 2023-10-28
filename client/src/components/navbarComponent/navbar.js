@@ -14,6 +14,8 @@ function Navbar() {
 
   const user = JSON.parse(localStorage.getItem('user'));
   console.log(user);
+  const token = localStorage.getItem('token');
+
   
   return (
     <div className='navbar'>

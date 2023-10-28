@@ -8,7 +8,7 @@ function deletePopUp({onClose,taskId}) {
   const baseURL = 'http://localhost:3001/api';
 
   const deleteTask = () => {
-    Axios.delete(baseURL+'/deleteTask/'+taskId,{
+    Axios.delete(baseURL+'/task/deleteTask/'+taskId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}

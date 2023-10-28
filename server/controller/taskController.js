@@ -40,7 +40,7 @@ const getTodoTasksHandler = async (req, res) => {
         // console.log(userId,status);  
 
         const data = await taskHandler.getTasks({ userId,status});
-        res.status(200).send(data);
+        return res.status(200).send(data);
     } catch (e) {  
         console.log(e.message);
         return res.status(500).send("internal server error");
@@ -54,7 +54,7 @@ const getInProcessTasksHandler = async (req, res) => {
         // console.log(userId,status);  
 
         const data = await taskHandler.getTasks({ userId,status});
-        res.status(200).send(data);
+        return res.status(200).send(data);
     } catch (e) {  
         console.log(e.message);
         return res.status(500).send("internal server error");
@@ -68,7 +68,7 @@ const getCompleteTasksHandler = async (req, res) => {
         // console.log(userId,status);  
 
         const data = await taskHandler.getTasks({ userId,status});
-        res.status(200).send(data);
+        return res.status(200).send(data);
     } catch (e) {  
         console.log(e.message);
         return res.status(500).send("internal server error");
@@ -77,12 +77,13 @@ const getCompleteTasksHandler = async (req, res) => {
 
 const startTaskHandler = async (req, res) => {
     try {
+        console.log(req.user_id);
         const taskId = req.params.id;
         console.log(taskId);
         const status = 1;
 
         const data = await taskHandler.updateTaskStatus({status,taskId});
-        res.status(200);
+        return res.status(200).send();
     } catch (e) {
         console.log(e.message);
         return res.status(500).send("internal server error");
@@ -91,11 +92,12 @@ const startTaskHandler = async (req, res) => {
 
 const completeTaskHandler = async (req, res) => {
     try {
+        console.log(req.user_id);
         const taskId = req.params.id;
         const status = 2;
 
         const data = await taskHandler.updateTaskStatus({status,taskId});
-        res.status(200);
+        return res.status(200).send();
     } catch (e) {
         console.log(e.message);
         return res.status(500).send("internal server error");

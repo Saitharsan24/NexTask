@@ -25,7 +25,7 @@ const loginHandler = async (req, res) => {
         { email: isExists.email, id: isExists.id },
         secretCode,
       );
-      res.status(200).send({
+      return res.status(200).send({
   
         user: {
           email: isExists.email,

@@ -34,7 +34,7 @@ function Login({toggleLoginOrSignup}) {
     return Object.keys(newErrors).length === 0;
   };
   
-  const baseURL = 'http://localhost:3001/api/login';
+  const baseURL = 'http://localhost:3001/api/user/login';
 
   const addEmployee = () => {
 

@@ -4,8 +4,7 @@ const secretCode = "nextask";
 const auth = async (req, res, next) => {
   try {
     let token = req.headers.authorization;
-    console.log(token);
-    console.log(req);
+    // console.log(token);
     if (token) {
       token = token.split(" ")[1];
       let user = jwt.verify(token, secretCode);

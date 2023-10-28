@@ -23,40 +23,42 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
             }
     });
 
+
     const baseURL = 'http://localhost:3001/api';
+
     useEffect(() => {
-        const asyncFunc = async () => {
-       await Axios.get(baseURL+'/getUserById/'+task.created_by,{
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem('token')}`
-            }}
-            ).then((response) => {
-                setCreatedBy(response.data[0].first_name);
-            }).catch((error) => {
-                console.log(error);
-            });
-
-        if (task.created_by != task.user_id) {
-        await Axios.get(baseURL+'/getUserById/'+task.user_id,{
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem('token')}`
+        const fetchUserData = async () => {
+            try {
+                const createdByResponse = await Axios.get(baseURL+'/user/getUserById/'+task.created_by, {
+                    headers: {
+                        'authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                setCreatedBy(createdByResponse.data[0].first_name);
+                
+                let assignedToUser = task.user_id;
+                if(task.created_by !== task.user_id) {
+                    const assignedToResponse = await Axios.get(baseURL+'/user/getUserById/'+task.user_id, {
+                        headers: {
+                            'authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                    assignedToUser = assignedToResponse.data[0].first_name;
+                } else {
+                    assignedToUser = createdByResponse.data[0].first_name;
                 }
-            }).then((response) => {
-                setAssignedTo(response.data[0].first_name);
-            }).catch((error) => {   
+                setAssignedTo(assignedToUser);
+            } catch (error) {
                 console.log(error);
-            });
-        } else {
-            setAssignedTo(createdBy);
-        }
-        }
-
-        asyncFunc();
-    },[]);
-
+            }
+        };
+    
+        fetchUserData();
+    }, []);
+    
     const handleStart = () => {
        
-        Axios.put(baseURL+'/startTask/'+taskId,
+        Axios.put(baseURL+'/task/startTask/'+taskId,
             {
                 headers: {
                     'authorization': `Bearer ${token}`

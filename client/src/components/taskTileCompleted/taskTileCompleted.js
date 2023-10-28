@@ -1,6 +1,5 @@
 import {React,useState,useEffect} from 'react'
 import './taskTileCompleted.css'
-import {FaEdit} from 'react-icons/fa'
 import { Button } from 'react-bootstrap'
 import {FaTrashCan} from 'react-icons/fa6'
 import Axios from 'axios'
@@ -23,7 +22,7 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
 
     const baseURL = 'http://localhost:3001/api';
     useEffect(() => {
-        Axios.get(baseURL+'/getUserById/'+task.created_by,{
+        Axios.get(baseURL+'/user/getUserById/'+task.created_by,{
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('token')}`
             }}
@@ -34,7 +33,7 @@ function TodoTaskTile({task, deleteStatus, viewDetails}) {
             });
 
         if (task.created_by != task.user_id) {
-            Axios.get(baseURL+'/getUserById/'+task.user_id,{
+            Axios.get(baseURL+'/user/getUserById/'+task.user_id,{
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`
                 }

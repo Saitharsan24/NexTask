@@ -21,7 +21,7 @@ function CreateNewTask({onClose}) {
     }
 
     useEffect(() => {
-        Axios.get(baseURL+'/getUsers',{
+        Axios.get(baseURL+'/user/getUsers',{
             headers: {
               'authorization': `Bearer ${localStorage.getItem('token')}`
           }}
@@ -40,7 +40,7 @@ function CreateNewTask({onClose}) {
 
 
     const createTask = () => {
-        Axios.post(baseURL+'/newTask',
+        Axios.post(baseURL+'/task/newTask',
             {
                 title: title,
                 description: description,

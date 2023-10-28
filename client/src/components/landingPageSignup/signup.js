@@ -53,7 +53,7 @@ function Signup({toggleLoginOrSignup}) {
         return Object.keys(newErrors).length === 0;
     };
 
-    const baseURL = 'http://localhost:3001/api/signup';
+    const baseURL = 'http://localhost:3001/api/user/signup';
 
     const addUser = () => {
 

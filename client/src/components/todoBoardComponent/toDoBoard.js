@@ -54,7 +54,7 @@ function ToDoBoard() {
 
   useEffect(() => {
     const asyncFunc = async () => {
-    await Axios.get(baseURL+'/getTodo/'+user.userId,{
+    await Axios.get(baseURL+'/task/getTodo/'+user.userId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}
@@ -66,7 +66,7 @@ function ToDoBoard() {
       console.log(error);
     })
 
-    await Axios.get(baseURL+'/getInprocess/'+user.userId,{
+    await Axios.get(baseURL+'/task/getInprocess/'+user.userId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}
@@ -78,7 +78,7 @@ function ToDoBoard() {
       console.log(error);
     })
 
-    await Axios.get(baseURL+'/getComplete/'+user.userId,{
+    await Axios.get(baseURL+'/task/getComplete/'+user.userId,{
       headers: {
         'authorization': `Bearer ${localStorage.getItem('token')}`
     }}

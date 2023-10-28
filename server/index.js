@@ -12,9 +12,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/api",userRouter);
-
-app.use("/api", taskRouter);
+app.use("/api/user",userRouter);
+app.use("/api/task", taskRouter);
 
 app.use("/", (req, res, next) => {
   res.send("SERVER RUNNING WELL !!!");
