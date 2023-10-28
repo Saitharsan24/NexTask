@@ -10,5 +10,6 @@ taskRouter.post("/newTask",middleware, taskHandler.createTaskHandler);
 taskRouter.delete("/deleteTask/:id",middleware, taskHandler.deleteTaskHandler);
 taskRouter.put("/startTask/:id", taskHandler.startTaskHandler);
 taskRouter.put("/completeTask/:id", taskHandler.completeTaskHandler);
+taskRouter.put("/updateTask", taskHandler.updateTaskHandler);
 
 module.exports = taskRouter;

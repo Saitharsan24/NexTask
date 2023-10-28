@@ -47,7 +47,7 @@ function ToDoBoard() {
         localStorage.removeItem('message');
       }, 3000);
     }
-  }, [showCreateNewTask, showDeletePopUp]);
+  }, [showCreateNewTask, showDeletePopUp, showDetailsPopup]);
 
   //get tasks from database
   const baseURL = 'http://localhost:3001/api';

@@ -29,7 +29,8 @@
     pointer-events: none;
     padding: 10px 20px;
     border:2px solid #119815;
-    color: #119815;
+    color: #ffffff;
+    background-color: #119815;
     font-weight: 650;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);

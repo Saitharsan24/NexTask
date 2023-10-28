@@ -32,6 +32,20 @@ function ViewTaskDetails({onClose , details}) {
 
     const [users, setUsers] = useState([]);
 
+    const [isChangedBtn, setIsChangedBtn] = useState(false);
+
+
+    //title onchange
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+        setIsChangedBtn(true);
+    }
+
+    //description onchange
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+        setIsChangedBtn(true);
+    }
 
     //handle editing 
 
@@ -73,6 +87,31 @@ function ViewTaskDetails({onClose , details}) {
         setEditState(!editState);
         onClose();
     }
+
+    //updating task details
+    const updateTaskDetails = () => {
+
+            Axios.put(baseURL+'/task/updateTask',{
+                title: title,
+                description: description,
+                task_id: details.task_id
+            },{
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`
+                }}
+                )
+                .then((response) => {
+                    console.log(response);
+                    localStorage.setItem('message',"Task updated successfully !");
+                    onClose();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+        }
+
+
 
     //getting created by user details
     //getting assigned to user details
@@ -204,11 +243,11 @@ useEffect(() => {
             <h2>{details.title}</h2>
             <div className='task-details-fields'>
                 <p>Title :</p>
-                <input type="text" value={title} disabled={!editState}/>
+                <input type="text" value={title} disabled={!editState} onChange={handleTitleChange}/>
             </div>
             <div className='task-details-fields'>
                 <p>Description :</p>
-                <textarea name="" id="" cols="30" rows="10" value={description} disabled={!editState}></textarea>
+                <textarea name="" id="" cols="30" rows="10" value={description} disabled={!editState} onChange={handleDescriptionChange}></textarea>
             </div>
             <div className='task-details-fields field-3'>
                 <div>
@@ -223,11 +262,10 @@ useEffect(() => {
             <div className='task-details-fields'>
                 <p>Assigned to :</p>
                 <Select 
-                    options={editState && users}
                     value={assignedTo}
                     defaultValue={assignedTo}
                     onChange={handleChange}
-                    isDisabled={!editState}
+                    isDisabled= {true}
                 />
             </div>
             <div className='details-btn'>
@@ -235,8 +273,8 @@ useEffect(() => {
                 {(taskOwner && !editState) && <FaEdit className='edit-icon' onClick={handleEdit}/>}
                 </div>
                 <div className="update-btn">
-                    <Button variant='primary' onClick={handleCancelEdit}>Cancel</Button>
-                    {editState && <Button variant='primary' onClick={()=>resetState()}>Update</Button>}
+                    <Button variant='primary' onClick={handleCancelEdit} >Cancel</Button>
+                    {editState && <Button variant='primary' disabled={!isChangedBtn} onClick={updateTaskDetails}>Update</Button>}
                 </div>
             </div>
         </div>

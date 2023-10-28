@@ -104,6 +104,29 @@ const completeTaskHandler = async (req, res) => {
     }
 }
 
+const updateTaskHandler = async (req, res) => {
+    try {
+        const task = req.body;
+        const data = await taskHandler.updateTask({task});
+        return res.status(200).send();
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+}
+
+const updateUserTaskHandler = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const taskId = req.params.taskId;
+        const data = await taskHandler.updateUserTask({userId,taskId});
+        return res.status(200).send();
+    } catch (e) {
+        console.log(e.message);
+        return res.status(500).send("internal server error");
+    }
+}
+
 module.exports= { 
     createTaskHandler, 
     getTodoTasksHandler, 
@@ -111,4 +134,6 @@ module.exports= {
     getCompleteTasksHandler,
     deleteTaskHandler,
     startTaskHandler,
-    completeTaskHandler };
+    completeTaskHandler,
+    updateTaskHandler,
+    updateUserTaskHandler };

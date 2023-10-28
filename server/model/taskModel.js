@@ -40,8 +40,16 @@ const deleteTask = async ({taskId}) => {
 }
 
 const updateTask = async ({task}) => {
-    await db.execute(`UPDATE task SET title = ?, description = ?, status = ? WHERE task_id = ?;`,
-                        [task.title,task.description,task.status,task.task_id]
+    await db.execute(`UPDATE task SET title = ?, description = ? WHERE task_id = ?;`,
+                        [task.title,task.description,task.task_id]
+    ).then((res)=>{
+        return res[0][0];
+    })
+}
+
+const updateUserTask = async ( {userId,taskId} ) => {
+    await db.execute(`UPDATE user_task SET user_id = ? WHERE task_id = ?;`,
+                        [userId,taskId]
     ).then((res)=>{
         return res[0][0];
     })
@@ -55,4 +63,4 @@ const updateTaskStatus = async ( {status,taskId} ) => {
     })
 }
 
-module.exports = { getTasks,createTask,assignTask,deleteTask, updateTask, updateTaskStatus };
+module.exports = { getTasks,createTask,assignTask,deleteTask, updateTask, updateTaskStatus,updateUserTask };
