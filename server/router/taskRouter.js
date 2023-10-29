@@ -8,8 +8,8 @@ taskRouter.get("/getInprocess/:id",middleware, taskHandler.getInProcessTasksHand
 taskRouter.get("/getComplete/:id",middleware, taskHandler.getCompleteTasksHandler);
 taskRouter.post("/newTask",middleware, taskHandler.createTaskHandler);
 taskRouter.delete("/deleteTask/:id",middleware, taskHandler.deleteTaskHandler);
-taskRouter.put("/startTask/:id", taskHandler.startTaskHandler);
-taskRouter.put("/completeTask/:id", taskHandler.completeTaskHandler);
-taskRouter.put("/updateTask", taskHandler.updateTaskHandler);
+taskRouter.put("/startTask/:id",middleware, taskHandler.startTaskHandler);
+taskRouter.put("/completeTask/:id",middleware, taskHandler.completeTaskHandler);
+taskRouter.put("/updateTask",middleware, taskHandler.updateTaskHandler);
 
 module.exports = taskRouter;

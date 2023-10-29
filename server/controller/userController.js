@@ -22,7 +22,7 @@ const loginHandler = async (req, res) => {
       }
 
       const token = jwt.sign(
-        { email: isExists.email, id: isExists.id },
+        { email: isExists.email, id: isExists.user_id },
         secretCode,
       );
       return res.status(200).send({
